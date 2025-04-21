@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>USC 4-Year Major/Minor Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* USC Brand Colors */
+    :root {
+      --usc-cardinal: #990000;
+      --usc-gold: #FFCC00;
+      --usc-black: #000000;
+      --usc-white: #FFFFFF;
+      --usc-grey: #CCCCCC;
+      --usc-dark-grey: #767676;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--usc-white);
+      color: var(--usc-black);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: var(--usc-cardinal);
+      color: var(--usc-white);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .usc-logo {
+      height: 48px;
+      margin-right: 1rem;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      background: var(--usc-white);
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(153,0,0,0.06);
+      padding: 2rem;
+    }
+
+    .planner-controls {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      align-items: flex-end;
+    }
+
+    .planner-controls label {
+      font-weight: 600;
+      color: var(--usc-cardinal);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    select, button {
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: 1px solid var(--usc-grey);
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    button {
+      background: var(--usc-gold);
+      color: var(--usc-black);
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #ffd700;
+    }
+
+    .years-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .year-column {
+      background: var(--usc-grey);
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .year-header {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--usc-cardinal);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .semester-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .semester {
+      background: var(--usc-white);
+      border: 2px solid var(--usc-cardinal);
+      border-radius: 6px;
+      padding: 0.75rem;
+      min-height: 80px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .semester-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--usc-cardinal);
+      margin-bottom: 0.5rem;
+    }
+
+    .course-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .course-list li {
+      background: var(--usc-gold);
+      color: var(--usc-black);
+      padding: 0.4rem 0.7rem;
+      margin-bottom: 0.3rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .add-course-btn {
+      background: var(--usc-cardinal);
+      color: var(--usc-white);
+      padding: 0.25rem 0.7rem;
+      font-size: 0.85rem;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .years-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .years-grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <!-- Placeholder for the USC logo -->
+      <img src="https://identity.usc.edu/files/2018/08/USC-logo-cardinal-gold.png" alt="USC Logo" class="usc-logo">
+      <h1>USC Degree Planner</h1>
+    </div>
+    <span style="font-size: 1.1rem; font-weight: 500;">Guided Pathways to Graduation</span>
+  </header>
+
+  <main>
+    <div class="planner-controls">
+      <div>
+        <label for="major">Major</label>
+        <select id="major">
+          <option>Computer Science</option>
+          <option>Business Administration</option>
+          <option>Psychology</option>
+          <option>Biological Sciences</option>
+          <option>Communication</option>
+        </select>
+      </div>
+      <div>
+        <label for="minor">Minor</label>
+        <select id="minor">
+          <option>None</option>
+          <option>Entrepreneurship</option>
+          <option>Mathematics</option>
+          <option>Political Science</option>
+          <option>Film Studies</option>
+        </select>
+      </div>
+      <div>
+        <button>Update Plan</button>
+      </div>
+    </div>
+
+    <div class="years-grid">
+      <div class="year-column">
+        <div class="year-header">Year 1</div>
+        <div class="semester-list">
+          <div class="semester">
+            <div class="semester-title">Fall</div>
+            <ul class="course-list">
+              <li>WRIT 150 - Writing and Critical Reasoning</li>
+              <li>MATH 125 - Calculus I</li>
+              <li>CSCI 103 - Introduction to Programming</li>
+              <li>GE - General Education Course</li>
+            </ul>
+          </div>
+          <div class="semester">
+            <div class="semester-title">Spring</div>
+            <ul class="course-list">
+              <li>MATH 126 - Calculus II</li>
+              <li>CSCI 170 - Discrete Methods</li>
+              <li>GE - General Education Course</li>
+              <li>Elective</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="year-column">
+        <div class="year-header">Year 2</div>
+        <div class="semester-list">
+          <div class="semester">
+            <div class="semester-title">Fall</div>
+            <ul class="course-list">
+              <li>CSCI 201 - Principles of Software Development</li>
+              <li>GE - General Education Course</li>
+              <li>Minor Course</li>
+              <li>Elective</li>
+            </ul>
+          </div>
+          <div class="semester">
+            <div class="semester-title">Spring</div>
+            <ul class="course-list">
+              <li>CSCI 270 - Introduction to Algorithms</li>
+              <li>GE - General Education Course</li>
+              <li>Minor Course</li>
+              <li>Elective</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="year-column">
+        <div class="year-header">Year 3</div>
+        <div class="semester-list">
+          <div class="semester">
+            <div class="semester-title">Fall</div>
+            <ul class="course-list">
+              <li>CSCI 310 - Software Engineering</li>
+              <li>Major Elective</li>
+              <li>Minor Course</li>
+              <li>Elective</li>
+            </ul>
+          </div>
+          <div class="semester">
+            <div class="semester-title">Spring</div>
+            <ul class="course-list">
+              <li>Major Elective</li>
+              <li>Minor Course</li>
+              <li>GE - General Education Course</li>
+              <li>Elective</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="year-column">
+        <div class="year-header">Year 4</div>
+        <div class="semester-list">
+          <div class="semester">
+            <div class="semester-title">Fall</div>
+            <ul class="course-list">
+              <li>Major Capstone</li>
+              <li>Minor Capstone</li>
+              <li>Elective</li>
+              <li>GE - General Education Course</li>
+            </ul>
+          </div>
+          <div class="semester">
+            <div class="semester-title">Spring</div>
+            <ul class="course-list">
+              <li>Elective</li>
+              <li>Elective</li>
+              <li>Elective</li>
+              <li>Elective</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
